@@ -1,47 +1,45 @@
 
 <div id="<%= dom_id property %>" >
- <%= turbo_frame_tag dom_id(property) do %>
-
+<%= turbo_frame_tag dom_id(property) do %>
     <table style="border: solid; padding: 20px; margin-left: 0%; width: 45%; background-color:white;"> 
       <% property.picture.each do |picture|%>
           <td><%=   image_tag(picture, style: "height:150px; width:150px") %></td>
       <% end %>
-
       <tr>
         <% if root_path==request.path%>
+        <th>Appartment_Name :</th>
+        <td><%= property.appartment_name %></td>
+        <th>Bedrooms :</th>
+        <td> <%= property.bedrooms %></td>
+      </tr>
+      <th>Price :</th>
+      <td> <b style="color:blue"><%=property.price %></b></td>
+      <% else %>
+        <tr>
           <th>Appartment_Name :</th>
           <td><%= property.appartment_name %></td>
           <th>Bedrooms :</th>
           <td> <%= property.bedrooms %></td>
-          </tr>
-          <th>Price :</th>
-          <td> <b style="color:blue"><%=property.price %></b></td>
-        <% else %>
-          <th>Appartment_Name :</th>
-            <td><%= property.appartment_name %></td>
-            <th>Bedrooms :</th>
-            <td> <%= property.bedrooms %></td>
-          </tr>
-          <tr>
+        </tr>
+        <tr>
             <th>Construction_Status :</th>
             <td><%=property.construction_status %></td>
             <th>Bathrooms :</th>
             <td><%=property.bathrooms %></td>
-          </tr>
-
-          <tr>
-            <th>listed_by :</th>
-            <td><%=property.listed_by %></td>
-            <th>Parking :</th>
-            <td><%=property.parking %></td>
-          </tr>
-
-          <tr>
-            <th>Garden :</th>
-            <td> <%=property.garden %></td>
-            <th>Price :</th>
-            <td> <b style="color:blue"><%=property.price %></b></td>
-          </tr>
-        <%end%>
+        </tr>
+        <tr>
+          <th>listed_by :</th>
+          <td><%=property.listed_by %></td>
+          <th>Parking :</th>
+          <td><%=property.parking %></td>
+        </tr>
+        <tr>
+          <th>Garden :</th>
+          <td> <%=property.garden %></td>
+          <th>Price :</th>
+          <td> <b style="color:blue"><%=property.price %></b></td>
+        </tr>
+      <%end%>
+    </table> 
 <%end%>
-   </table>
+  

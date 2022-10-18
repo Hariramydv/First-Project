@@ -26,11 +26,14 @@
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                   <li>
                      <%= link_to 'All properties', root_path, class: "dropdown-item",  class:"dropdown-item"%>
-                    </li>
-                    <% if user_signed_in? %>
+                  </li>
+                  <% if user_signed_in? %>
                     <li><a class="dropdown-item"href="/properties/new">New property</a>
                     </li>
-                    <% end %>   
+                  <% end %> 
+                  <li>
+                    <%= link_to 'Archieved properties', archived_properties_path, class: "dropdown-item", class:"dropdown-item"%>
+                  </li>  
                 </ul>
             </div>&nbsp&nbsp&nbsp&nbsp
 
@@ -61,13 +64,11 @@
 
           </ul>
             <% if request.path==root_path || request.path==search_path %>
-                <%= form_with url: "search", method: :get do |form| %>
-                  <%= form.label :q, "Search" %>
-                  <%= form.text_field :q , class:"form-control me-2", style:"position:absolute;right:100px;top:8px; width:250px",placeholder:"Search" %>
-                  <%= form.submit "Search",class:"btn btn-outline-success" %>
-                <% end %>
-            <%# <% elsif request.path!=contact_users_path && request.path!= about_users_path && request.path!=profile_properties_path && request.path!=unapproved_listings_properties_path && request.path!=users_path%>
-                <%#= render 'properties/search_form'%> %>
+              <%= form_with url: "search", method: :get do |form| %>
+                <%= form.label :q, "Search" %>
+                <%= form.text_field :q , class:"form-control me-2", style:"position:absolute;right:100px;top:8px; width:250px",placeholder:"Search" %>
+                <%= form.submit "Search",class:"btn btn-outline-success" %>
+              <% end %>
             <%end%>
         </div>
       </div>

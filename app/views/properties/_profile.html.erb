@@ -18,17 +18,17 @@
         <% if current_user.has_role? :admin %>
             <%#  is_active = pending_listings_properties_path == request.path %>
               <%# if is_active.eql? true  &&%>
-              <% if pending_listings_properties_path == request.path %>
-                <% is_active = 'active'  %>
-                <% color = 'white'  %>
-                <% path = pending_listings_properties_path %>  
-              <% else  %>
-                <% is_active = ''  %>
-                <% color = 'black'  %>
-                <% path = unapproved_listings_properties_path %>
-              <% end %>
-              <%= link_to 'Pending listing', pending_listings_properties_path, style:"color:#{color};margin-top:2px",  class:"nav-link #{is_active}"  %>
-              <span style="color: #{color};background-color:green; height:70%; width:30px; border-radius:50px; align-items: center; margin-top:5px; margin-left:5px;line-height: 2.0;"><%= Property.unapproved.count%>  </span>   
+            <% if pending_listings_properties_path == request.path %>
+              <% is_active = 'active'  %>
+              <% color = 'white'  %>
+              <% path = pending_listings_properties_path %>  
+            <% else  %>
+              <% is_active = ''  %>
+              <% color = 'black'  %>
+              <% path = unapproved_listings_properties_path %>
+            <% end %>
+            <%= link_to 'Pending listing', pending_listings_properties_path, style:"color:#{color};margin-top:2px",  class:"nav-link #{is_active}"  %>
+            <span style="color: #{color};background-color:green; height:70%; width:30px; border-radius:50px; align-items: center; margin-top:5px; margin-left:5px;line-height: 2.0;"><%= Property.unapproved.count%>  </span>   
         <% else %>
           <% if unapproved_listings_properties_path == request.path %>
             <% is_active = 'active'  %>

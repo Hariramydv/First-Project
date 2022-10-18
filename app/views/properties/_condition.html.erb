@@ -1,9 +1,0 @@
-  <% if unapproved_listings_properties_path || pending_listings_properties_path == request.path %>
-    <% @is_active = 'active'  %>
-    <% @color = 'white'  %>
-    <% @path = pending_listings_properties_path %>      
-  <% else  %>
-    <% @is_active = ''  %>
-    <% @color = 'black'  %>
-    <% @path = unapproved_listings_properties_path %>
-  <% end %>

@@ -38,12 +38,7 @@
 
   <div>
     <%= form.label :listed_by, style: "display: block" %>
-    <%#= form.text_field :listed_by %>
-    <%# if current_user.has_role? :admin %>
-      <%#= form.select :listed_by, [" Admin "] %>
-    <%# else %>
-      <%= form.select :listed_by, [[ " User "], ["Admin"]] %>
-    <%#end%>
+    <%= form.select :listed_by, [[ " User "], ["Admin"]] %>
   </div>
 
   <div>
@@ -55,12 +50,6 @@
     <%= form.label :garden, style: "display: block" %>
     <%= form.text_field :garden %>
   </div>
-
-
-   <!-- <div>
-    <%#= form.label :image, style: "display: block" %>
-    <%#= form.file_field :image %>
-   </div> -->
 
    <div>
     <%= form.label :picture, style: "display: block" %>
