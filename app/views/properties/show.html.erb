@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+<%= turbo_frame_tag dom_id(@property) do %>
+  <%= render @property %>
+<% end %>
+<div>
+  <% if can? :update, @property %>
+    <%= link_to "Edit this property", edit_property_path(@property), class:"btn btn-info" %> &nbsp&nbsp&nbsp&nbsp
+  <%end%>
+  <% if request.path== current_listings_properties_path %>
+    <%= link_to "Back to properties", current_listings_properties_path , class:"btn btn-secondary" %>&nbsp&nbsp
+  <% else %>   
+    <%= link_to "Back to properties", root_path , class:"btn btn-secondary" %>&nbsp&nbsp
+  <% end %>
+  <% if can? :destroy,@property%>
+    <%= button_to "Destroy this property", @property, method: :delete,class:"btn btn-danger"  %>
+  <%end%>
+
+</div>

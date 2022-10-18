@@ -1,0 +1,9 @@
+<div style="display:flex; justify-content:center">
+
+<%= search_form_for @q do |f| %>
+  <%#= f.label :appartment_name_cont %>
+  <%= f.search_field :appartment_name_cont, value:'' ,class:"form-control me-2", style:"display:initial; width:auto" %>
+  <%= f.submit "search", class:"btn btn-outline-success"%>
+  <%= link_to 'reset', request.path, class:'cancel-button', style:"border:2px solid black;background-color:red;color:white" %>
+<%end%>
+</div>

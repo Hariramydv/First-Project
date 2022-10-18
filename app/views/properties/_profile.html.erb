@@ -1,0 +1,85 @@
+<% if request.path == unapproved_listings_properties_path || current_listings_properties_path || users_path %> 
+  <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist" style="gap:20px">
+    <li class="nav-item" role="presentation">
+      <button  data-bs-toggle="pill" data-bs-target="#pills-home"  role="tab" aria-controls="pills-home" aria-selected="true" style="height:50px; border-radius:10px; margin-left:10px">
+
+      <% if users_path == request.path || profile_properties_path == request.path %>
+        <% is_active = 'active'  %>
+        <% color = 'white'  %> 
+      <% else %>
+        <% is_active = ''  %>
+        <% color = 'black'  %>
+      <% end %>
+      <%= link_to 'Profile' , users_path, style:"color:#{color}",class:"nav-link #{is_active}", id:"pills-home-tab", type:"button"  %> 
+      </button>
+    </li>
+    <li role="presentation">
+      <button id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false", style="display:flex; height:50px; border-radius:10px"> 
+        <% if current_user.has_role? :admin %>
+            <%#  is_active = pending_listings_properties_path == request.path %>
+              <%# if is_active.eql? true  &&%>
+              <% if pending_listings_properties_path == request.path %>
+                <% is_active = 'active'  %>
+                <% color = 'white'  %>
+                <% path = pending_listings_properties_path %>  
+              <% else  %>
+                <% is_active = ''  %>
+                <% color = 'black'  %>
+                <% path = unapproved_listings_properties_path %>
+              <% end %>
+              <%= link_to 'Pending listing', pending_listings_properties_path, style:"color:#{color};margin-top:2px",  class:"nav-link #{is_active}"  %>
+              <span style="color: #{color};background-color:green; height:70%; width:30px; border-radius:50px; align-items: center; margin-top:5px; margin-left:5px;line-height: 2.0;"><%= Property.unapproved.count%>  </span>   
+        <% else %>
+          <% if unapproved_listings_properties_path == request.path %>
+            <% is_active = 'active'  %>
+            <% color = 'white'  %>
+            <% path = pending_listings_properties_path %>       
+          <% else %>
+            <% is_active = ''  %>
+            <% color = 'black'  %>
+            <% path = unapproved_listings_properties_path %>
+          <% end %>
+          <%= link_to 'Unapproved listing', unapproved_listings_properties_path, style:"color:#{color};margin-top:2px", class:"nav-link #{is_active}"  %>
+          <span style="color:white;background-color:green; height:70%; width:30px; border-radius:50px; align-items: center; margin-top:5px; margin-left:5px;line-height: 2.0;"><%= current_user.properties.unapproved.count %>  </span>             
+        <% end %>
+      </button>
+    </li>
+    <li class="nav-item" role="presentation">
+      <button  id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false", style="display:flex; height:50px; border-radius:10px">
+      <% if current_listings_properties_path == request.path %>
+        <% is_active = 'active'  %>
+        <% color = 'white'  %>           
+      <% else %>
+        <% is_active = ''  %>
+        <% color = 'black'  %>
+      <% end %>
+
+      <%= link_to 'My Listing' , current_listings_properties_path , style:"color:#{color}; margin-top:2px" ,  class:"nav-link #{is_active}"  %><span style="color:white; background-color:black; height:70%; width:30px; border-radius:50px; align-items: center; margin-top:5px; margin-left:5px;line-height: 2.0;" > <%= current_user.properties.approved.count %> </span>
+      
+      </button>
+    </li>
+  </ul>
+  <div class="tab-content" id="pills-tabContent">
+    <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+   <% if profile_properties_path== request.path %>
+      <% if user_signed_in? %>
+      <div  class="nav-link active" style="border:1px solid black;text-align: center;width: 50%;background-color: white;"><br>
+        <table border="solid black" style="text-align:center;">
+          <%= image_tag current_user.image if current_user.image.attached? %>
+          Name : <strong><%= current_user.name %></strong><br>
+          Email : <strong><%= current_user.email %> </strong></br>
+          Pincode : <strong><%= current_user.pincode %></strong><br>
+          Mobile_no : <strong><%= current_user.mobile_no %></strong> 
+        </table> 
+        <br> 
+      <% end %>
+    <span> <%= link_to 'Edit profile' , edit_user_registration_path, :class => 'navbar-link' %></span>
+  <% end %>
+  </div>
+    </div>
+    <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+    </div>
+    <div class="tab-pane fade" id="pills-contact" role="tabpanel"  aria-labelledby="pills-contact-tab">
+    </div>
+  </div>
+<%end%>

@@ -1,0 +1,15 @@
+<%= render 'properties/profile' %>
+<div style="border:1px solid black;text-align: center;width: 50%;background-color: white;"><br>
+  <% if user_signed_in? %>
+    <table border="solid black" style="text-align:center;">
+      <%= image_tag current_user.image if current_user.image.attached? %>
+      Name : <strong><%= current_user.name %></strong><br>
+      Email : <strong><%= current_user.email %> </strong></br>
+      Pincode : <strong><%= current_user.pincode %></strong><br>
+      Mobile_no : <strong><%= current_user.mobile_no %></strong> 
+    </table> 
+    <br> 
+  <% end %>
+ <span> <%= link_to 'Edit profile' , edit_user_registration_path, :class => 'navbar-link' %></span>
+</div>
+<br><br>

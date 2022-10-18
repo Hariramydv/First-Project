@@ -1,0 +1,43 @@
+<b><%#== pagy_nav(@pagy) %></b>
+
+<p style="color: green"><%= notice %></p>
+<%if request.path !=root_path && request.path !=search_path %>
+  &nbsp;<%= link_to 'Back to properties', root_path ,class:"btn btn-secondary"%><br><br>
+<% end %>
+
+<%if request.path ==root_path || request.path == search_path %>
+  <span style="border:1px solid black; font-size: 40px; background-color:black;color :white;">ALL LISTING OF PROPERTIES</span>
+  <br><br>
+<%elsif request.path == pending_listings_properties_path  %>
+  <h1 style="color:green;background-color:white;"><b><u>Pending Listing</u></b></h1>
+<% elsif user_signed_in? && current_user.has_role?(:admin) %>
+  <h1 style="color:green;background-color:white;"><b><u>Admin Listing</u></b></h1>
+  <% elsif user_signed_in? && request.path==unapproved_listings_properties_path %>
+    <h1 style="color:green;background-color:white;"><b><u>unapproved Listing</u></b></h1>
+<% else %>
+  <%= render 'search_form' %>
+<h1 style="color:green;background-color:yellow  ;width:25%;"><b><u>Listing</u></b></h1>
+  <br>
+<%end%>
+
+<div id="properties" >
+  <% @properties.each do |property| %>
+   <%#= turbo_frame_tag 'property' do %>
+   
+    <%= render property %>
+    <p>
+       <%= link_to "Show more", property, class:"btn btn-info"  %>
+       <% if can? :update, property %>
+         <%= link_to "Edit properties", edit_property_path(property), class:"btn btn-primary" %>
+       <% end %>
+    <%# end %>   
+       <% if can? :destroy, property %>
+         <%= button_to "Destroy this property", property_path(property), method: :delete, class:"btn btn-danger"  %>
+       <% end %>
+        <%if request.path == pending_listings_properties_path  %>
+          <%= link_to "Approve", approve_listing_property_path(property), class:"btn btn-success" %>
+         <% end %>
+    </p>
+    <hr style="border: 5px solid black;">
+  <% end %>
+</div>
